@@ -42,7 +42,7 @@ print("The result is: {}".format(result))
 ```
 
 ### Webscraping Example
-Below is another use case for `asyncRun` with simple webscraping.
+Below is another use case for `asyncRun` with simple webscraping. Below we build a shallow scraper for Google images.
 
 ```Python
 import asyncer
@@ -72,3 +72,5 @@ links = asyncer.asyncRun(root_urls, getAllLinks, showProgress=True)
 print("Downloading All Images")
 images = asyncer.asyncRun(list(itertools.chain.from_iterable(links)), downloadImage, showProgress=True)
 ```
+
+![Webscrape Example](res/asyncer_webscrape.gif "Webscrape Example")
