@@ -6,5 +6,6 @@ setup(
     version='1.0',
     description= "Python Asynchronous Function Execution with AsyncIO",
     packages = find_packages(),
-    intall_requires=['tqdm']
+    intall_requires=['tqdm'],
+    setup_requires=['tqdm']
 )
