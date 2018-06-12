@@ -11,6 +11,7 @@ except Exception as e:
     except Exception as e:
         print("Asyncer: No tqdm install found, no progress will be shown")
 
+print("Hello World")
 def prog_wrapper(func, pbar=None, mutex = None, *args):    
     result = func(*args)
     if pbar:        
@@ -33,7 +34,7 @@ def asyncRun(data, function, workers=10, showProgress=False):
                     function,
                     pbar,
                     mutex,
-                    *in_val
+                    *(in_val,) if type(in_val)!=tuple else in_val
                 )
                 for in_val in data
             ]       
