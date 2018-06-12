@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='Asycner',
+    name='Asyncer',
     author='Muhammed Anwar',
     version='1.0',
     description= "Python Asynchronous Function Execution with AsyncIO",
