@@ -42,4 +42,33 @@ print("The result is: {}".format(result))
 ```
 
 ### Webscraping Example
-Below is a more advanced use case for `asyncRun`,
+Below is another use case for `asyncRun` with simple webscraping.
+
+```Python
+import asyncer
+import requests
+from bs4 import BeautifulSoup
+from io import BytesIO
+from PIL import Image
+import itertools
+
+img_dir = "images"
+searches = ["cats", "dogs", "airplanes", "flowers", "memes", "waterfall", "bike", "home", "stock photos"]
+root_urls = ["https://www.google.ca/search?q={}&hl=en&source=lnms&tbm=isch".format(q) for q in searches]
+
+def downloadImage(img_src):
+    try:              
+        Image.open(BytesIO(requests.get(img_src).content)).save("{}/{}.jpg".format(img_dir, img_src.split(":")[-1]))     
+    except Exception as e:
+        print(str(e))
+
+def getAllLinks(url):
+    soup = BeautifulSoup(requests.get(url).text, 'html.parser')    
+    images = list(set([(img.get('src')) for img in soup.find_all("img")]))  
+    return images
+   
+print("Fetching All Links")
+links = asyncer.asyncRun(root_urls, getAllLinks, showProgress=True)
+print("Downloading All Images")
+images = asyncer.asyncRun(list(itertools.chain.from_iterable(links)), downloadImage, showProgress=True)
+```
