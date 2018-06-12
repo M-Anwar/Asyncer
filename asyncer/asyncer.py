@@ -11,7 +11,6 @@ except Exception as e:
     except Exception as e:
         print("Asyncer: No tqdm install found, no progress will be shown")
 
-print("Hello World")
 def prog_wrapper(func, pbar=None, mutex = None, *args):    
     result = func(*args)
     if pbar:        
