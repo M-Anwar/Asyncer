@@ -1,5 +1,5 @@
 # Asyncer
-Python Asynchronous Function Execution using AscyncIO
+Python Asynchronous Function Execution using AscyncIO. Concurrent execution of lengthy IO bound computations such as webscraping and API testing. Compatible with both Jupyter Notebooks and command line Python programs.
 
 ![alt text](res/asyncer_main.gif "Logo Title Text 1")
 
@@ -9,7 +9,7 @@ pip install git+git://github.com/M-Anwar/Asyncer.git#egg=asyncer
 ```
 
 ## Usage
-Asyncer exposes one main function `asyncRun`. This function take an iterable of data, a function to run for each element and optional arguments.
+Asyncer exposes one main function `asyncRun`. This function takes an iterable of data, a function to run for each element and optional arguments.
 
 ```python
 def asyncRun(data, function, workers=10, showProgress=False):
@@ -24,8 +24,9 @@ def asyncRun(data, function, workers=10, showProgress=False):
     """
 ```
 
-**Example Usage**
+## Examples
 
+### Simple Example
 Below is a simple program showing the use of `asyncRun`
 
 ```Python
@@ -39,3 +40,6 @@ def long_task(input):
 result = asyncer.asyncRun([1]*100, long_task, workers = 10, showProgress=True)
 print("The result is: {}".format(result))
 ```
+
+### Webscraping Example
+Below is a more advanced use case for `asyncRun`,

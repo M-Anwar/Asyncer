@@ -33,7 +33,7 @@ def asyncRun(data, function, workers=10, showProgress=False):
                     function,
                     pbar,
                     mutex,
-                    in_val
+                    *in_val
                 )
                 for in_val in data
             ]       
