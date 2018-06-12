@@ -1,7 +1,15 @@
 import asyncio
 import concurrent.futures
 from threading import Lock
-from tqdm import tqdm_notebook
+
+try:
+    get_ipython()   
+    from tqdm import tqdm_notebook as tqdm
+except Exception as e:  
+    try: 
+        from tqdm import tqdm as tqdm
+    except Exception as e:
+        print("Asyncer: No tqdm install found, no progress will be shown")
 
 def prog_wrapper(func, pbar=None, mutex = None, *args):    
     result = func(*args)
@@ -11,9 +19,9 @@ def prog_wrapper(func, pbar=None, mutex = None, *args):
         mutex.release()
     return result  
 
-def asyncRun(data, function, workers=10, showProgress=True):
+def asyncRun(data, function, workers=10, showProgress=False):
 
-    pbar = tqdm_notebook(total=len(data)) if showProgress else None
+    pbar = tqdm(total=len(data)) if showProgress else None
     mutex = Lock()
     async def runAll():                        
         with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
